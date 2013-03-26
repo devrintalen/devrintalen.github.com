@@ -1,0 +1,29 @@
+---
+layout: default
+title: Devrin Talen
+---
+
+<h1>Devrin Talen</h1>
+
+<p class='lead'>Hi, I'm Devrin and I like
+to <a href="https://github.com/devrintalen">code</a>, <a href="https://batchpcb.com/users/6106">solder</a>,
+and eat <a href="http://nicoletalen.net/">my wife's</a> amazing
+cooking. I work on <a href="/projects">projects</a> when I'm not
+sleeping.</p>
+
+<div class='row'>
+  <div class='span6'>
+    <h2>blog posts</h2>
+    <ul class='unstyled'>
+      {% for post in site.posts %}
+      <li><small>{{ post.date | date_to_string }}</small> &raquo; <a href="{{ post.url }}">{{ post.title }}</a></li>
+      {% endfor %}
+    </ul>
+  </div>
+
+  <div class='span4 offset2'>
+    <h3>on the web</h3>
+    <a href="http://stackoverflow.com/users/5269/devrin">
+      <img src="http://stackoverflow.com/users/flair/5269.png" width="208" height="58" alt="profile for Devrin at Stack Overflow, Q&amp;A for professional and enthusiast programmers" title="profile for Devrin at Stack Overflow, Q&amp;A for professional and enthusiast programmers">
+    </a>
+  </div>

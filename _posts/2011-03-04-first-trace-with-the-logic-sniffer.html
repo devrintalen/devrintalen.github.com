@@ -1,0 +1,17 @@
+---
+layout: post
+title: First trace with the Logic Sniffer
+tags:
+- ADB
+- crosstalk
+- logic sniffer
+- something worked
+status: publish
+type: post
+published: true
+meta:
+  _edit_last: '19855582'
+  jabber_published: '1299293831'
+  _wpas_skip_twitter: '1'
+---
+<a href="http://devrintalen.files.wordpress.com/2011/03/firsttrace.png"><img class="aligncenter size-large wp-image-40" title="ADBUSB Junk Protocol Trace" src="http://devrintalen.files.wordpress.com/2011/03/firsttrace.png?w=1024" alt="logic analyzer trace" width="1024" height="397" /></a>Just got my first protocol trace using my new <a title="Open Bench Logic Sniffer" href="http://dangerousprototypes.com/2010/02/25/prototype-open-logic-sniffer-logic-analyzer-2/">Open Bench Logic Sniffer</a>! Channel 0 is the ADB data wire, and you can see two separate "talk" commands being sent by the Mega32. There's no mouse connected, so there's no response. There's also a fair amount of junk on channels 2-5 that looks like crosstalk on the probe wires (they're not connected to anything and should be grounded).
