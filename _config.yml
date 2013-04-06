@@ -1,3 +1,4 @@
 safe: true
 exclude: [README.md]
 pygments: true
+paginate: 3

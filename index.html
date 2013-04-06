@@ -14,7 +14,7 @@ title: Devrin Talen
   </div>
 </div>
 
-{% for post in site.posts %}
+{% for post in paginator.posts %}
 
 <div class="row">
   <div class="span12">
@@ -33,3 +33,34 @@ title: Devrin Talen
 </div>
 
 {% endfor %}
+
+<!-- Pagination links -->
+<div class="row">
+
+<div class="span12">
+
+  <p class="text-center">
+
+  {% if paginator.previous_page %}
+    {% if paginator.previous_page == 1 %}
+    <a href="/" class="btn">Previous</a>
+    {% else %}
+    <a href="/page{{paginator.previous_page}}" class="btn">Previous</a>
+    {% endif %}
+  {% else %}
+    <span class="btn disabled">Previous</span>
+  {% endif %}
+
+  Page: {{paginator.page}} of {{paginator.total_pages}}
+
+  {% if paginator.next_page %}
+    <a href="/page{{paginator.next_page}}" class="btn">Next</a>
+  {% else %}
+    <span class="btn disabled">Next</span>
+  {% endif %}
+
+  </p>
+
+</div>
+
+</div>
