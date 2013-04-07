@@ -1,0 +1,29 @@
+---
+layout: nil
+---
+
+<?xml version="1.0" encoding="UTF-8" ?>
+<rss version="2.0">
+  <channel>
+    <title>Devrin Talen</title>
+    <description>Devrin Talen's blog</description>
+    <link>http://devrintalen.net</link>
+    <lastBuildDate>{{ site.time | date_to_xmlschema }}</lastBuildDate>
+    {% for post in site.posts %}
+    {% if forloop.first %}
+    <pubDate>{{ post.date | date_to_xmlschema }}</pubDate>
+    {% endif %}
+    {% endfor %}
+    <ttl>1800</ttl>
+    
+    {% for post in site.posts %}
+    <item>
+      <title>{{ post.title }}</title>
+      <link>http://devrintalen.net{{ post.url }}</link>
+      <guid>http://devrintalen.net{{ post.id }}</guid>
+      <pubDate>{{ post.date | date_to_xmlschema }}</pubDate>
+    </item>
+    {% endfor %}
+    
+  </channel>
+</rss>
