@@ -9,7 +9,7 @@ following:
 
 - Jekyll doesn't care about anything in `_pages`.
 - You need to create your own `index.html`, Jekyll doesn't make it for you.
-- Don't use `{% include foo %}' to link to media like images, instead put
+- Don't use `{% include foo %}` to link to media like images, instead put
   them in a folder like `img` and Jekyll will copy that over to your site.
 
 This site's layout:
