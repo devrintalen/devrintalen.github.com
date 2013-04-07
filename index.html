@@ -22,10 +22,11 @@ title: Devrin Talen
     <h1>
       {{ post.title }} 
       <small>{{ post.date | date: "%B %d %Y" }}</small>
-      <a class="pull-right" href="{{ post.url }}"><i class="icon-bookmark"></i></a>
     </h1>
 
     {{ post.content }}
+
+    <p><small><a href="{{ post.url }}">Permalink</a></small></p>
 
     <hr />
 
