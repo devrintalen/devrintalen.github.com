@@ -1,4 +1,4 @@
 safe: true
-exclude: [README.md]
+exclude: [README.md _drafts]
 pygments: true
 paginate: 3
