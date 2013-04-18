@@ -127,6 +127,3 @@ It's possible for timer 0 interrupts to cause the `for(...)` loop in
 2. After 20 iterations, we get a timer 0 interrupt. Here `i=20`.
 3. The `for` loop in the timer interrupt leaves `i` at 10.
 4. The processor now returns to the main `for` loop, now with `i=10`.
-
-
-
