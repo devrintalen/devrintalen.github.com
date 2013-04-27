@@ -25,7 +25,8 @@ But a lower power way would be to only update the LCD when a key is
 pressed, and even then to interrupt on keypresses rather than
 polling. The operative word here is *interrupt*: we want the keypad to
 cause the processor to do something, rather than the processor
-constantly checking the keypad. This is where we asynchronous.
+constantly checking the keypad. This is when we start going
+asynchronous.
 
 AVR Interrupts
 --------------
@@ -35,7 +36,7 @@ we can explore how they work on an AVR processor. The AVR architecture
 defines a global interrupt enable, and if we're going to use
 interrupts we have to run this:
 
-[1]: yo
+[1]: http://en.wikipedia.org/wiki/Interrupt
 
 {% highlight c++ %}
    #include <avr/interrupt.h>
@@ -81,16 +82,6 @@ These look like normal functions, but as we went over above they will
 get called based on hardware events, and in general shouldn't be
 called from normal code.
 
-Specifics: Timer Interrupts
----------------------------
-
-How to set these up on an AVR.
-
-Specifics: External Interrupts
-------------------------------
-
-How to set these up on an AVR.
-
 Code Design
 -----------
 
@@ -100,7 +91,8 @@ gets modified, but when there are interrupts occuring underneath
 sequential code then weird things can happen when they share any
 state. For example, consider this simple program:
 
-[^2]: And by state I mean variables, which remember are stored in memory. Any program is just instructions and memory.
+[^2]: And by state I mean variables, which remember are stored in
+memory. Any program is just instructions and memory.
 
 {% highlight c++ %}
    #include <avr/interrupt.h>
@@ -127,3 +119,46 @@ It's possible for timer 0 interrupts to cause the `for(...)` loop in
 2. After 20 iterations, we get a timer 0 interrupt. Here `i=20`.
 3. The `for` loop in the timer interrupt leaves `i` at 10.
 4. The processor now returns to the main `for` loop, now with `i=10`.
+
+How could we have designed this code so that this wouldn't have
+happened in the first place? The first design principle we should have
+is to *identify separate threads of execution*. In the above case, the
+`main()` function and the timer interrupt should be independent of
+each other. Therefore we need to maintain separate, distinct
+state. Preferably with good variable names. Something like
+`main_index` and `timer_index`:
+
+{% highlight c++ %}
+   #include <avr/interrupt.h>
+   
+   int main_index, timer_index; // per-thread index
+
+   // ...
+{% endhighlight %}
+
+By separating our state, and clearly identifying what's shared, we
+limit the opportunities to shoot ourselves in the foot. For any state
+that *is* shared, we need to be careful to consider all of the ways in
+which interrupts can cause weird things to happen. In general, any
+time you have a timer or external interrupt you should always keep in
+mind that a shared variable can change in between *any two lines of
+code*. The reality is more subtle than that, but that should prevent
+you from doing something like this contrived example:
+
+{% highlight c++ %}
+   int shared_flag;
+    
+   ISR(INT0_vect) {
+       shared_flag = 0;
+       shared_flag = shared_flag; // May not be 0!
+   }
+
+   ISR(TIM0_COMPA_vect) {
+       shared_flag = 1;
+       shared_flag = shared_flag; // May not be 1!
+   }
+{% endhighlight %}
+
+All in all, be mindful of state when designing asynchronous
+programs. It's relatively easy to fall for common bugs, but also not
+hard to avoid them by watching out for these common mistakes.
