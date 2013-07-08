@@ -1,0 +1,15 @@
+body {
+    height: 100%;
+    font: 1em courier, mono;
+}
+
+#site {
+    width: 42em;
+    margin: 3em auto 2em;
+    line-height: 1.5em;
+}
+
+.content {
+    font: 1em helvetica, arial, sans-serif;
+    line-height: 1.5em;
+}
