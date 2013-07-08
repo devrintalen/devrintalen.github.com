@@ -3,65 +3,17 @@ layout: default
 title: Devrin Talen
 ---
 
-<div class="navbar navbar-inverse">
-  <div class="navbar-inner">
-    <a class="brand" href="/">Devrin Talen</a>
-    <ul class="nav">
-      <li class="active"><a href="/">Blog</a></li>
-      <li><a href="/about.html">About</a></li>
-      <li><a href="/projects.html">Projects</a></li>
-    </ul>
-  </div>
-</div>
+<p><strong>Devrin Talen</strong> (blog)</p>
 
-{% for post in paginator.posts %}
-
-<div class="row-fluid">
-  <div class="span12">
-
-    <h1>
-      {{ post.title }} 
-      <small>{{ post.date | date: "%B %d %Y" }}</small>
-    </h1>
-
-    {{ post.content }}
-
-    <p><small><a href="{{ post.url }}">Permalink</a></small></p>
-
-    <hr />
-
-  </div>
-</div>
-
+<ul>
+{% for post in site.posts %}
+<li><a href="{{ post.url }}">{{ post.title }}</a> {{ post.date | date: "%B %d %Y" }}</li>
 {% endfor %}
+</ul>
 
-<!-- Pagination links -->
-<div class="row-fluid">
+<p>(other)</p>
 
-<div class="span12">
-
-  <p class="text-center">
-
-  {% if paginator.previous_page %}
-    {% if paginator.previous_page == 1 %}
-    <a href="/" class="btn">Previous</a>
-    {% else %}
-    <a href="/page{{paginator.previous_page}}" class="btn">Previous</a>
-    {% endif %}
-  {% else %}
-    <span class="btn disabled">Previous</span>
-  {% endif %}
-
-  Page: {{paginator.page}} of {{paginator.total_pages}}
-
-  {% if paginator.next_page %}
-    <a href="/page{{paginator.next_page}}" class="btn">Next</a>
-  {% else %}
-    <span class="btn disabled">Next</span>
-  {% endif %}
-
-  </p>
-
-</div>
-
-</div>
+<ul>
+<li><a href="/projects.html">projects</a></li>
+<li><a href="/about.html">about</a></li>
+</ul>
